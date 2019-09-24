@@ -10,6 +10,13 @@ function setup() {
         arv.insereNo(int(inp.value()));
         inp.value("");
     });
+    arv.insereNo(10);
+    arv.insereNo(8);
+    arv.insereNo(5);
+    arv.insereNo(6);
+    arv.insereNo(15);
+    console.log(arv);
+    arv.percorreNos();
 }
 
 function draw() {
