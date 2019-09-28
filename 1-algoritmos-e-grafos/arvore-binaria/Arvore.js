@@ -5,17 +5,27 @@ class Arvore {
     }
 
     insereNo(valor) {
+        let n = 1;
         if (this.raiz == null) {
             this.raiz = new No(valor);
-            this.raiz.pos = (1, 1);
+            this.raiz.pos.y = 1;
+            this.raiz.pos.x = width/2;
+            this.niveis = n;
         } else if (valor < this.raiz.valor) {
-            this.raiz.addEsquerdo(new No(valor));
+            n = this.raiz.addEsquerdo(new No(valor), 1);
         } else {
-            this.raiz.addDireito(new No(valor));
+            n = this.raiz.addDireito(new No(valor), 1);
         }
+        //this.percorreNos();
+        
+        if (n > this.niveis) {
+            this.niveis = n;
+        }
+        
+      console.log(this);
     }
 
     percorreNos() {
-        this.raiz.visita();
+        this.raiz.visita(this.niveis);
     }
 }

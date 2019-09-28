@@ -1,24 +1,25 @@
 let inp, btn, arv;
 
 function setup() {
-    createCanvas(500, 500);
-    background(200);
+    createCanvas(700, 500);
     arv = new Arvore();
-    inp = createInput();
-    btn = createButton("clique");
+
+    inp = select(".txt-elm");
+    btn = select(".btn-elm");
+
     btn.mousePressed(() => {
-        arv.insereNo(int(inp.value()));
-        inp.value("");
+        if (inp.value() == "" || isNaN(inp.value())) {
+            alert("Preencha um valor válido!");
+        } else {
+            arv.insereNo(int(inp.value()));
+            inp.value("");
+        }
     });
-    arv.insereNo(10);
-    arv.insereNo(8);
-    arv.insereNo(5);
-    arv.insereNo(6);
-    arv.insereNo(15);
-    console.log(arv);
-    arv.percorreNos();
 }
 
 function draw() {
-    
+    background(200);
+    if (arv.niveis != 0) {
+        arv.percorreNos();
+    }
 }

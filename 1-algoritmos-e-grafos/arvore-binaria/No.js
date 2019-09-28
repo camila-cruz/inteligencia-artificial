@@ -7,51 +7,64 @@ class No {
         this.pai = null;
     }
 
-    addEsquerdo(no) {
-        no.pos.y += 1;
-        no.pos.x += 1;
+    addEsquerdo(no, n) {
+        n++;
+        let w = width-50;
         if (this.esquerdo == null) {
-            no.pai = this;
+            no.pos.y = this.pos.y + 1;
+            //no.pos.x += this.pos.x/2;
+            no.pos.x = this.pos.x - w/pow(2, n);
+            no.pai = this.pos;
             this.esquerdo = no;
+            return n;
         } else if (no.valor < this.esquerdo.valor) {
-            this.esquerdo.addEsquerdo(no);
+            n = this.esquerdo.addEsquerdo(no, n);
         } else {
-            this.esquerdo.addDireito(no);
+            n = this.esquerdo.addDireito(no, n);
         }
+        return n;
     }
 
-    addDireito(no) {
-        no.pos.y += 1;
-        no.pos.x += 2;
+    addDireito(no, n) {
+        n++;
+        let w = width-50;
         if (this.direito == null) {
-            no.pai = this;
+            no.pos.y = this.pos.y + 1;
+            //no.pos.x = this.pos.x + 1/2*this.pos.x;
+            no.pos.x = this.pos.x + w/pow(2, n);
+            no.pai = this.pos;
             this.direito = no;
+            return n;
         } else if (no.valor < this.direito.valor) {
-            this.direito.addEsquerdo(no);
+            n = this.direito.addEsquerdo(no, n);
         } else {
-            this.direito.addDireito(no);
+            n = this.direito.addDireito(no, n);
         }
+      return n;
     }
 
-    visita() {
+    visita(n) {
         if (this.esquerdo != null) {
-            this.esquerdo.visita();
+            this.esquerdo.visita(n);
         }
 
         //text(this.valor, this.pos.x*100, this.pos.y * 100);
-        this.desenhaNo(4);
+        this.desenhaNo(n+1); // n + 1, 5
 
         if (this.direito != null) {
-            this.direito.visita();
+            this.direito.visita(n);
         }
     }
 
     desenhaNo(niveis) {
+        let d = 20;  // diametro do círculo
         let distY = height/niveis;
-        let distX = width/this.pos.y;
-        console.log(distY);
-        console.log(distX);
-        ellipse(distX * this.pos.x, distY * this.pos.y, 10);
-        text(this.valor, distX * this.pos.x, distY * this.pos.y);
+        if (this.pai != null) {
+          line(this.pos.x, distY * this.pos.y, this.pai.x, distY * this.pai.y + d/2);
+        }
+        ellipse(this.pos.x, distY * this.pos.y, d);
+        textAlign(CENTER, CENTER);
+        text(this.valor, this.pos.x, distY * this.pos.y);
+        
     }
 }
