@@ -14,3 +14,6 @@ Baseado nas playlists [Intelligence and Learning](https://www.youtube.com/playli
 
 ## Playlists de apoio
 - [Beginners Guide to Machine Learning in JavaScript with ML5.js](https://www.youtube.com/playlist?list=PLRqwX-V7Uu6YPSwT06y_AEYTqIwbeam3y)
+
+## Repositórios de apoio
+- [Coding Train - Machine Learning](https://github.com/CodingTrain/Machine-Learning)
